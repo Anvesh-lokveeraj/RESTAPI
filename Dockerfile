@@ -3,8 +3,11 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Debugging: List files in target directory
-RUN ls /app/target/
+# Debugging: Print current working directory
+RUN pwd
+
+# Debugging: List all files and directories in current directory
+RUN ls -la
 
 COPY src ./src
 RUN mvn clean package -DskipTests
