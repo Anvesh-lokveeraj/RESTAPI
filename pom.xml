@@ -58,6 +58,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>restapi</finalName>
 	</build>
 
 </project>

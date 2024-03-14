@@ -1,19 +1,7 @@
-FROM maven:3.9.6-openjdk-17 AS build
-WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline
+FROM openjdk:17-jdk
 
-# Debugging: Print current working directory
-RUN pwd
+COPY target/restapi.jar .
 
-# Debugging: List all files and directories in target directory
-RUN ls -la target/
-
-COPY src ./src
-RUN mvn clean package -DskipTests
-
-FROM openjdk:17.0.1-jdk-slim
-WORKDIR /app
-COPY --from=build /app/target/restapi-0.0.1-SNAPSHOT.jar restapi.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "restapi.jar"]
+
+ENTRYPOINT [ "java","-jar", "restapi.jar" ]
